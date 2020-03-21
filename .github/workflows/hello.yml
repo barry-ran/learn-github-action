@@ -32,7 +32,16 @@ jobs:
         echo Add other actions to build,
         echo test, and deploy your project.
     - name: set env
+      id: set-env
       run: |
         echo "::set-env name=action_state::yellow"
+        echo "::set-output name=action_fruit::strawberry"
     - name: get env
-      run: echo "get env action_state:$action_state"
+      id: get-env
+      run: |
+        echo "get env action_state:$action_state"
+        echo "get output action_fruit:$jobs.set-env.outputs.action_fruit"
+    - name: get env2
+      run: |
+        echo "get env action_state:$action_state"
+        echo "get output action_fruit:$jobs.set-env.outputs.action_fruit"
