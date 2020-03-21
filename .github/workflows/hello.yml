@@ -42,6 +42,7 @@ jobs:
         echo "get env action_state:$action_state"
         echo "get output action_fruit:${{ jobs.set-env.outputs.action_fruit }}"
     - name: get env2
+      shell: pwsh
       run: |
         echo "get env action_state:$action_state"
         echo "get output action_fruit:${{ jobs.set-env.outputs.action_fruit }}"
