@@ -40,8 +40,8 @@ jobs:
       id: get-env
       run: |
         echo "get env action_state:$action_state"
-        echo "get output action_fruit:$jobs.set-env.outputs.action_fruit"
+        echo "get output action_fruit:${{ jobs.set-env.outputs.action_fruit }}"
     - name: get env2
       run: |
         echo "get env action_state:$action_state"
-        echo "get output action_fruit:$jobs.set-env.outputs.action_fruit"
+        echo "get output action_fruit:${{ jobs.set-env.outputs.action_fruit }}"
