@@ -31,3 +31,8 @@ jobs:
       run: |
         echo Add other actions to build,
         echo test, and deploy your project.
+    - name: set env
+      run: |
+        echo "::set-env name=action_state::yellow"
+    - name: get env
+      run: echo "get env action_state:$action_state"
