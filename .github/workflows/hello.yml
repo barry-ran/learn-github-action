@@ -41,14 +41,14 @@ jobs:
       env: 
         env1: e111
       run: |
-        ehco "globle_env:$globle_env"
+        echo "globle_env:$globle_env"
         echo "job_env1:$job_env1"
         echo "::set-env name=env2::e222"
         echo "::set-output name=out1::o111"
     - name: get env
       id: get-env
       run: |
-        ehco "globle_env:$globle_env"
+        echo "globle_env:$globle_env"
         echo "job_env1:$job_env1"
         echo "env2:$env2"
         echo "get output out1:${{ steps.set-env.outputs.out1 }}"
@@ -56,7 +56,7 @@ jobs:
     - name: get env pwsh
       shell: pwsh
       run: |
-        ehco "globle_env:$globle_env"
+        echo "globle_env:$globle_env"
         echo "job_env1:$job_env1"
         echo "env2:$env2"
         echo "get output out1:${{ steps.set-env.outputs.out1 }}"
