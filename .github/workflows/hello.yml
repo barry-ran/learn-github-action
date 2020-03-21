@@ -16,6 +16,8 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
+    env:
+      job_env1: je111
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -31,6 +33,7 @@ jobs:
       run: |
         echo Add other actions to build,
         echo test, and deploy your project.
+        echo 'JOB_ENV1:$JOB_ENV1'
     - name: set env
       id: set-env
       env: 
@@ -38,17 +41,16 @@ jobs:
       run: |
         echo "::set-env name=env2::e222"
         echo "::set-output name=out1::o111"
+        echo 'job_env1:$job_env1'
     - name: get env
       id: get-env
       run: |
-        echo "get env env1:${{ steps.set-env.env.env1 }}"
-        echo "get env env2:$env2"
-        echo "get env env2:${{ steps.set-env.env.env2 }}"
+        echo 'job_env1:$job_env1'
+        echo "env2:$env2"
         echo "get output out1:${{ steps.set-env.outputs.out1 }}"
     - name: get env2
       shell: pwsh
       run: |
-        echo "get env env1:${{ steps.set-env.env.env1 }}"
-        echo "get env env2:$env2"
-        echo "get env env2:${{ steps.set-env.env.env2 }}"
+        echo 'job_env1:$job_env1'
+        echo "env2:$env2"
         echo "get output out1:${{ steps.set-env.outputs.out1 }}"
