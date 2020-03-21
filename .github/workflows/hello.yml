@@ -33,16 +33,22 @@ jobs:
         echo test, and deploy your project.
     - name: set env
       id: set-env
+      env: 
+        env1: e111
       run: |
-        echo "::set-env name=action_state::yellow"
-        echo "::set-output name=action_fruit::strawberry"
+        echo "::set-env name=env2::e222"
+        echo "::set-output name=out1::o111"
     - name: get env
       id: get-env
       run: |
-        echo "get env action_state:$action_state"
-        echo "get output action_fruit:${{ jobs.set-env.outputs.action_fruit }}"
+        echo "get env env1:${{ steps.set-env.env.env1 }}"
+        echo "get env env2:$env2"
+        echo "get env env2:${{ steps.set-env.env.env2 }}"
+        echo "get output out1:${{ steps.set-env.outputs.out1 }}"
     - name: get env2
       shell: pwsh
       run: |
-        echo "get env action_state:$action_state"
-        echo "get output action_fruit:${{ jobs.set-env.outputs.action_fruit }}"
+        echo "get env env1:${{ steps.set-env.env.env1 }}"
+        echo "get env env2:$env2"
+        echo "get env env2:${{ steps.set-env.env.env2 }}"
+        echo "get output out1:${{ steps.set-env.outputs.out1 }}"
