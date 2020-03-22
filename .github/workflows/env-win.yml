@@ -65,7 +65,7 @@ jobs:
     - name: dev env cmd
       shell: cmd
       run: |
-        echo "HOME:${{ evn::HOME }}"
+        echo "HOME:${{ evn.HOME }}"
         echo "GITHUB_WORKFLOW:${{ env.GITHUB_WORKFLOW }}"
         echo "GITHUB_ACTOR:${{ GITHUB_ACTOR }}"
         echo "GITHUB_REPOSITORY:${{GITHUB_REPOSITORY }}"
