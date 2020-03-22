@@ -7,10 +7,10 @@ name: env-win
 on:
   push:
     paths: 
-      - '.github/workflows/env-win.yml'
+      - '.github/workflows/context-env.yml'
   pull_request:
     paths: 
-      - '.github/workflows/env-win.yml'
+      - '.github/workflows/context-env.yml'
 # 全局环境变量，本yml中所有jobs和steps都可以使用
 env: 
   globle_env: ge111
