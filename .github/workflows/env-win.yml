@@ -9,7 +9,7 @@ on:
     branches: [ master ]
   pull_request:
     branches: [ master ]
-# 全局环境变量，本yml中所有jobs和steps都可以使用
+# 全局环境变量，本yml中所有jobs和steps都可以使用（只能 bash shell中使用）
 env: 
   globle_env: ge111
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
@@ -18,7 +18,7 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: windows-latest
-    # job的环境变量，此job下的所有steps都可以用
+    # job的环境变量，此job下的所有steps都可以用（只能 bash shell中使用）
     env:
       job_env1: je111
 
@@ -41,13 +41,16 @@ jobs:
       env: 
         env1: e111
       run: |
-        echo "globle_env:$globle_env"
-        echo "job_env1:$job_env1"
+        echo "env1:$env1"
+        echo 'globle_env:$globle_env'
+        echo job_env1:$job_env1
         echo "::set-env name=dynamec_env2::de222"
+        Write-Host 'wr_env:'we111
         echo "::set-output name=out1::o111"
     - name: get env
       id: get-env
       run: |
+        echo wr_env:$wr_env
         echo "globle_env:$globle_env"
         echo "job_env1:$job_env1"
         echo "dynamec_env2:$dynamec_env2"
