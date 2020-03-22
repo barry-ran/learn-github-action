@@ -48,16 +48,16 @@ jobs:
         echo "env1:${{ env.env1 }}"
         echo "::set-env name=dynamec_env2::de222"
         echo "::set-output name=out1::o111"
-    - name: get env
+    # Windows 默认shell是powershell
+    - name: get env powershell
       id: get-env
       run: |
         echo "globle_env:${{ env.globle_env }}"
         echo "job_env1:${{ env.job_env1 }}"
         echo "dynamec_env2:${{ env.dynamec_env2 }}"
         echo "get output out1:${{ steps.set-env.outputs.out1 }}"
-    # 不同的shell env不能透传,outputs可以透传（注意不同shell访问环境变量的方式不同）
-    - name: get env pwsh
-      # Windows 默认shell是powershell
+    # 注意不同shell访问环境变量的方式不同
+    - name: get env bash
       shell: bash
       run: |
         echo "globle_env:$globle_env"
@@ -68,22 +68,11 @@ jobs:
       # Windows 默认shell是powershell
       shell: cmd
       run: |
-        echo "globle_env:${{ env.globle_env }}"
+        echo "globle_env:${{ env:globle_env }}"
         echo "job_env1:${{ env.job_env1 }}"
         echo "dynamec_env2:${{ env.dynamec_env2 }}"
         echo "get output out1:${{ steps.set-env.outputs.out1 }}"
-    - name: dev env cmd
-      shell: cmd
-      run: |
-        echo "HOME:${{ env.HOME }}"
-        echo "GITHUB_WORKFLOW:${{ env.GITHUB_WORKFLOW }}"
-        echo "GITHUB_ACTOR:${{ env.GITHUB_ACTOR }}"
-        echo "GITHUB_REPOSITORY:${{ env.GITHUB_REPOSITORY }}"
-        echo "GITHUB_EVENT_NAME:${{ env.GITHUB_EVENT_NAME }}"
-        echo "GITHUB_WORKSPACE:${{ env.GITHUB_WORKSPACE }}"
-        echo "GITHUB_SHA:${{ env.GITHUB_SHA }}"
-        echo "GITHUB_REF:${{ env.GITHUB_REF }}"
-    - name: dev env bash
+    - name: def env bash
       shell: bash
       run: |
         echo "HOME:$HOME"
@@ -94,11 +83,22 @@ jobs:
         echo "GITHUB_WORKSPACE:$GITHUB_WORKSPACE"
         echo "GITHUB_SHA:$GITHUB_SHA"
         echo "GITHUB_REF:$GITHUB_REF"
-    - name: dev env powershell
+    - name: def env cmd
+      shell: cmd
+      run: |
+        echo "HOME:%HOME%"
+        echo "GITHUB_WORKFLOW:%GITHUB_WORKFLOW%"
+        echo "GITHUB_ACTOR:%GITHUB_ACTOR%"
+        echo "GITHUB_REPOSITORY:%GITHUB_REPOSITORY%"
+        echo "GITHUB_EVENT_NAME:%GITHUB_EVENT_NAME%"
+        echo "GITHUB_WORKSPACE:%GITHUB_WORKSPACE%"
+        echo "GITHUB_SHA:%GITHUB_SHA%"
+        echo "GITHUB_REF:%GITHUB_REF%"
+    - name: def env powershell
       shell: powershell
       run: |
-        echo "HOME:${{ env.HOME }}"
-        echo "GITHUB_WORKFLOW:${{ env.GITHUB_WORKFLOW }}"
+        echo "HOME:${ env:HOME }"
+        echo "GITHUB_WORKFLOW:${ env:GITHUB_WORKFLOW }"
         echo "GITHUB_ACTOR:${{ env.GITHUB_ACTOR }}"
         echo "GITHUB_REPOSITORY:${{ env.GITHUB_REPOSITORY }}"
         echo "GITHUB_EVENT_NAME:${{ env.GITHUB_EVENT_NAME }}"
