@@ -56,22 +56,29 @@ jobs:
         echo "job_env1:${{ env.job_env1 }}"
         echo "dynamec_env2:${{ env.dynamec_env2 }}"
         echo "get output out1:${{ steps.set-env.outputs.out1 }}"
-    # 注意不同shell访问环境变量的方式不同
+    # 注意不同shell访问环境变量的方式不同 https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#using-a-specific-shell
     - name: get env bash
       shell: bash
       run: |
-        echo "globle_env:$globle_env"
+        echo "globle_env:${{ env.globle_env }}"
         echo "job_env1:$job_env1"
         echo "dynamec_env2:$dynamec_env2"
         echo "get output out1:${{ steps.set-env.outputs.out1 }}"
     - name: get env cmd
-      # Windows 默认shell是powershell
       shell: cmd
       run: |
-        echo globle_env:${env:globle_env}
+        echo globle_env:${{ env.globle_env }}
         echo "job_env1:${{ env.job_env1 }}"
         echo "dynamec_env2:${{ env.dynamec_env2 }}"
         echo "get output out1:${{ steps.set-env.outputs.out1 }}"
+    - name: get env pwsh
+      shell: pwsh
+      run: |
+        echo globle_env:${{ env.globle_env }}
+        echo "job_env1:${{ env.job_env1 }}"
+        echo "dynamec_env2:${{ env.dynamec_env2 }}"
+        echo "get output out1:${{ steps.set-env.outputs.out1 }}"
+    # 默认环境变量
     - name: def env bash
       shell: bash
       run: |
