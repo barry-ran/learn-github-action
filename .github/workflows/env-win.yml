@@ -6,9 +6,11 @@ name: env-win
 # events but only for the master branch
 on:
   push:
-    branches: [ master ]
+    paths: 
+      - '.github/workflows/env-win.yml'
   pull_request:
-    branches: [ master ]
+    paths: 
+      - '.github/workflows/env-win.yml'
 # 全局环境变量，本yml中所有jobs和steps都可以使用（注意不同shell访问环境变量的方式不同）
 env: 
   globle_env: ge111
