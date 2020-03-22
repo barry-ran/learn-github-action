@@ -68,7 +68,7 @@ jobs:
       # Windows 默认shell是powershell
       shell: cmd
       run: |
-        echo "globle_env:${{ env:globle_env }}"
+        echo globle_env:${env:globle_env}
         echo "job_env1:${{ env.job_env1 }}"
         echo "dynamec_env2:${{ env.dynamec_env2 }}"
         echo "get output out1:${{ steps.set-env.outputs.out1 }}"
