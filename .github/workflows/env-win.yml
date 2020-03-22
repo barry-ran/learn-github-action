@@ -29,17 +29,17 @@ jobs:
 
     # Runs a single command using the runners shell
     - name: Run a one-line script
-      shell: bash
+      shell: cmd
       run: echo Hello, world!
     # Runs a set of commands using the runners shell
     - name: Run a multi-line script
       # Windows 默认shell是powershell
-      shell: bash
+      shell: cmd
       run: |
         echo Add other actions to build,
         echo test, and deploy your project.
     - name: set env
-      shell: bash
+      shell: cmd
       id: set-env
       # step环境变量，只能当前step使用
       env: 
@@ -58,7 +58,7 @@ jobs:
         echo "dynamec_env2:$dynamec_env2"
         echo "get output out1:${{ steps.set-env.outputs.out1 }}"
     # 不同的shell env不能透传,outputs可以透传
-    - name: get env pwsh
+    - name: get env cmd
       shell: cmd
       run: |
         echo "globle_env:$globle_env"
