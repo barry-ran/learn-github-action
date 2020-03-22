@@ -11,7 +11,7 @@ on:
   pull_request:
     paths: 
       - '.github/workflows/env-win.yml'
-# 全局环境变量，本yml中所有jobs和steps都可以使用（注意不同shell访问环境变量的方式不同）
+# 全局环境变量，本yml中所有jobs和steps都可以使用
 env: 
   globle_env: ge111
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
@@ -20,7 +20,7 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: windows-latest
-    # job的环境变量，此job下的所有steps都可以用（注意不同shell访问环境变量的方式不同）
+    # job的环境变量，此job下的所有steps都可以用
     env:
       job_env1: je111
 
@@ -48,7 +48,8 @@ jobs:
         echo "env1:${{ env.env1 }}"
         echo "::set-env name=dynamec_env2::de222"
         echo "::set-output name=out1::o111"
-    # 使用表达式语法${{}}访问env上下文，https://help.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions
+    # 使用表达式语法${{}}访问env上下文,不同shell访问上下文都是使用表达式语法${{}}
+    # 除了env还有其它上下文：https://help.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions
     # Windows 默认shell是powershell
     - name: get env powershell
       id: get-env
@@ -78,7 +79,9 @@ jobs:
         echo "job_env1:${{ env.job_env1 }}"
         echo "dynamec_env2:${{ env.dynamec_env2 }}"
         echo "get output out1:${{ steps.set-env.outputs.out1 }}"
-    # 默认环境变量，注意不同shell访问环境变量的方式不同 https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#using-a-specific-shell
+    # 默认环境变量，注意不同shell访问默认环境变量的方式不同
+    # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#using-a-specific-shell
+    # 注意默认环境变量和上下文env是不同的概念，也是不同的访问方式
     - name: def env bash
       shell: bash
       run: |
