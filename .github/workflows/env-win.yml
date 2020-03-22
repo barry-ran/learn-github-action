@@ -41,7 +41,7 @@ jobs:
       env: 
         env1: e111
       run: |
-        echo "job_env1:${{ env.job_env1 }}"
+        echo job_env1:${{ env.job_env1 }}
         echo "::set-env name=dynamec_env2::de222"
         Write-Host 'wr_env:'we111
         echo "::set-output name=out1::o111"
