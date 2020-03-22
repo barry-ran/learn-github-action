@@ -67,12 +67,12 @@ jobs:
       run: |
         echo "HOME:${{ env.HOME }}"
         echo "GITHUB_WORKFLOW:${{ env.GITHUB_WORKFLOW }}"
-        echo "GITHUB_ACTOR:${{ GITHUB_ACTOR }}"
-        echo "GITHUB_REPOSITORY:${{GITHUB_REPOSITORY }}"
-        echo "GITHUB_EVENT_NAME:${{ GITHUB_EVENT_NAME }}"
-        echo "GITHUB_WORKSPACE:${{ GITHUB_WORKSPACE }}"
-        echo "GITHUB_SHA:${{ GITHUB_SHA }}"
-        echo "GITHUB_REF:${{ GITHUB_REF }}"
+        echo "GITHUB_ACTOR:${{ env.GITHUB_ACTOR }}"
+        echo "GITHUB_REPOSITORY:${{ env.GITHUB_REPOSITORY }}"
+        echo "GITHUB_EVENT_NAME:${{ env.GITHUB_EVENT_NAME }}"
+        echo "GITHUB_WORKSPACE:${{ env.GITHUB_WORKSPACE }}"
+        echo "GITHUB_SHA:${{ env.GITHUB_SHA }}"
+        echo "GITHUB_REF:${{ env.GITHUB_REF }}"
     - name: dev env bash
       shell: bash
       run: |
@@ -87,11 +87,11 @@ jobs:
     - name: dev env powershell
       shell: powershell
       run: |
-        echo "HOME:$HOME"
-        echo "GITHUB_WORKFLOW:$GITHUB_WORKFLOW"
-        echo "GITHUB_ACTOR:$GITHUB_ACTOR"
-        echo "GITHUB_REPOSITORY:$GITHUB_REPOSITORY"
-        echo "GITHUB_EVENT_NAME:$GITHUB_EVENT_NAME"
-        echo "GITHUB_WORKSPACE:$GITHUB_WORKSPACE"
-        echo "GITHUB_SHA:$GITHUB_SHA"
-        echo "GITHUB_REF:$GITHUB_REF"
+        echo "HOME:${{ env.HOME }}"
+        echo "GITHUB_WORKFLOW:${{ env.GITHUB_WORKFLOW }}"
+        echo "GITHUB_ACTOR:${{ env.GITHUB_ACTOR }}"
+        echo "GITHUB_REPOSITORY:${{ env.GITHUB_REPOSITORY }}"
+        echo "GITHUB_EVENT_NAME:${{ env.GITHUB_EVENT_NAME }}"
+        echo "GITHUB_WORKSPACE:${{ env.GITHUB_WORKSPACE }}"
+        echo "GITHUB_SHA:${{ env.GITHUB_SHA }}"
+        echo "GITHUB_REF:${{ env.GITHUB_REF }}"
