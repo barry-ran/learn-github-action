@@ -11,10 +11,6 @@ on:
   pull_request:
     paths:
       - '**'
-  release:
-    types: [published]
-    branches:
-    - master
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -25,26 +21,19 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    - name: Test
-      run: |
-        echo ${{ github.event.release.upload_url }}
-        echo ${{ github.event.release.tag_name }}
-        echo ${{ github.event.release.types }}
     - name: Checkout code
       uses: actions/checkout@v2
     - name: Build project # This would actually build your project, using zip for an example artifact
-      if: ${{ github.event.release.upload_url }}
+      if: startsWith(github.ref, 'refs/tags/')
       run: |
         zip --junk-paths my-artifact README.md
     # Upload to release
-    - name: Upload Release Asset
-      id: upload-release-asset
-      if: ${{ github.event.release.upload_url }}
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Upload Release
+      if: startsWith(github.ref, 'refs/tags/')
+      uses: svenstaro/upload-release-action@v1-release
       with:
-        upload_url: ${{ github.event.release.upload_url }} 
-        asset_path: ./my-artifact.zip
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: ./my-artifact.zip
         asset_name: my-artifact.zip
-        asset_content_type: application/zip
+        tag: ${{ github.ref }}
+        overwrite: true
