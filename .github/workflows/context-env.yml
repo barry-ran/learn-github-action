@@ -49,7 +49,6 @@ jobs:
         echo "::set-env name=dynamec_env2::de222"
         echo "::set-output name=out1::o111"
     # 使用表达式语法${{}}访问env上下文,不同shell访问上下文都是使用表达式语法${{}}
-    # 除了env还有其它上下文：https://help.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions
     # Windows 默认shell是powershell
     - name: get env powershell
       id: get-env
@@ -79,6 +78,22 @@ jobs:
         echo "job_env1:${{ env.job_env1 }}"
         echo "dynamec_env2:${{ env.dynamec_env2 }}"
         echo "get output out1:${{ steps.set-env.outputs.out1 }}"
+    # 除了env还有其它上下文：https://help.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions
+    - name: get some context
+      run: |
+        echo github:${{ toJson(github) }}
+        echo job:${{ toJson(job) }}
+        echo steps:${{ toJson(steps) }}
+        echo runner:${{ toJson(runner) }}
+        echo strategy:${{ toJson(strategy) }}
+        echo matrix:${{ toJson(matrix) }}
+        
+        echo github.workspace:${{ github.workspace }}
+        echo github.ref:${{ github.ref }}
+        echo github.sha:${{ github.sha }}
+        echo github.action:${{ github.action }}
+        echo github.workspace:${{ github.workspace }}
+        echo github.workspace:${{ github.workspace }}
     # 默认环境变量，注意不同shell访问默认环境变量的方式不同
     # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#using-a-specific-shell
     # 注意默认环境变量和上下文env是不同的概念，也是不同的访问方式
