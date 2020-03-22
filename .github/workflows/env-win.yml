@@ -62,6 +62,14 @@ jobs:
         echo "job_env1:$job_env1"
         echo "dynamec_env2:$dynamec_env2"
         echo "get output out1:${{ steps.set-env.outputs.out1 }}"
+    - name: get env cmd
+      # Windows 默认shell是powershell
+      shell: cmd
+      run: |
+        echo "globle_env:$globle_env"
+        echo "job_env1:$job_env1"
+        echo "dynamec_env2:$dynamec_env2"
+        echo "get output out1:${{ steps.set-env.outputs.out1 }}"
     - name: dev env cmd
       shell: cmd
       run: |
