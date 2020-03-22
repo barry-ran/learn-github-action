@@ -51,7 +51,7 @@ jobs:
       run: |
         echo "globle_env:${{ env.globle_env }}"
         echo "job_env1:${{ env.job_env1 }}"
-        echo "dynamec_env2:${{ dynamec_env2 }}"
+        echo "dynamec_env2:${{ env.dynamec_env2 }}"
         echo "get output out1:${{ steps.set-env.outputs.out1 }}"
     # 不同的shell env不能透传,outputs可以透传（注意不同shell访问环境变量的方式不同）
     - name: get env pwsh
