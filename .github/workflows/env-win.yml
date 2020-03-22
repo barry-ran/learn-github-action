@@ -48,6 +48,7 @@ jobs:
         echo "env1:${{ env.env1 }}"
         echo "::set-env name=dynamec_env2::de222"
         echo "::set-output name=out1::o111"
+    # 使用表达式语法${{}}访问env上下文，https://help.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions
     # Windows 默认shell是powershell
     - name: get env powershell
       id: get-env
@@ -56,7 +57,6 @@ jobs:
         echo "job_env1:${{ env.job_env1 }}"
         echo "dynamec_env2:${{ env.dynamec_env2 }}"
         echo "get output out1:${{ steps.set-env.outputs.out1 }}"
-    # 注意不同shell访问环境变量的方式不同 https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#using-a-specific-shell
     - name: get env bash
       shell: bash
       run: |
@@ -78,7 +78,7 @@ jobs:
         echo "job_env1:${{ env.job_env1 }}"
         echo "dynamec_env2:${{ env.dynamec_env2 }}"
         echo "get output out1:${{ steps.set-env.outputs.out1 }}"
-    # 默认环境变量
+    # 默认环境变量，注意不同shell访问环境变量的方式不同 https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#using-a-specific-shell
     - name: def env bash
       shell: bash
       run: |
@@ -104,11 +104,11 @@ jobs:
     - name: def env powershell
       shell: powershell
       run: |
-        echo "HOME:${ env:HOME }"
-        echo "GITHUB_WORKFLOW:${ env:GITHUB_WORKFLOW }"
-        echo "GITHUB_ACTOR:${{ env.GITHUB_ACTOR }}"
-        echo "GITHUB_REPOSITORY:${{ env.GITHUB_REPOSITORY }}"
-        echo "GITHUB_EVENT_NAME:${{ env.GITHUB_EVENT_NAME }}"
-        echo "GITHUB_WORKSPACE:${{ env.GITHUB_WORKSPACE }}"
-        echo "GITHUB_SHA:${{ env.GITHUB_SHA }}"
-        echo "GITHUB_REF:${{ env.GITHUB_REF }}"
+        echo "HOME:$env:HOME"
+        echo "GITHUB_WORKFLOW:$env:GITHUB_WORKFLOW"
+        echo "GITHUB_ACTOR:$env:GITHUB_ACTOR"
+        echo "GITHUB_REPOSITORY:$env:GITHUB_REPOSITORY"
+        echo "GITHUB_EVENT_NAME:$env:GITHUB_EVENT_NAME"
+        echo "GITHUB_WORKSPACE:$env:GITHUB_WORKSPACE"
+        echo "GITHUB_SHA:$env:GITHUB_SHA"
+        echo "GITHUB_REF:$env:GITHUB_REF"
