@@ -2,8 +2,7 @@
 
 name: env-win
 
-# Controls when the action will run. Triggers the workflow on push or pull request 
-# events but only for the master branch
+# 触发规则详解 https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#on
 on:
   push:
     paths: 
@@ -12,13 +11,16 @@ on:
     paths: 
       - '.github/workflows/context-env.yml'
 # 全局环境变量，本yml中所有jobs和steps都可以使用
+# 不同级别env详解 https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#env
+# 使用表达式语法${{}}访问上下文 https://help.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions
 env: 
   globle_env: ge111
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
   build:
-    # The type of runner that the job will run on
+    # windows-latest目前是windows server 2019,vs2019,windows server 2016安装的是vs2017
+    # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
     runs-on: windows-latest
     # job的环境变量，此job下的所有steps都可以用
     env:
@@ -58,6 +60,7 @@ jobs:
         echo "dynamec_env2:${{ env.dynamec_env2 }}"
         echo "get output out1:${{ steps.set-env.outputs.out1 }}"
     - name: get env bash
+      # shell介绍 https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#using-a-specific-shell
       shell: bash
       run: |
         echo "globle_env:${{ env.globle_env }}"
